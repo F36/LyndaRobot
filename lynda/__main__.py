@@ -17,23 +17,17 @@ from lynda.modules.helper_funcs.chat_status import is_user_admin
 from lynda.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}!
-// I am an Anime themed group management bot with a lot of Special Features.
-You can find the list of available commands with /help.
-==========================
--> [Lynda's Repo](https://waa.ai/Lynda)
--> Report [Lynda Support](https://t.me/LyndaEagleSupport) if I go offline
-==========================
-`Maintained by` @YorktownEagleUnion
-
+Hi {}, my name is {}! 
+I am an Anime themed group management bot.
+You can find my list of available commands with /help.
+The support group chat is at @AnimeChatOfficial.
 """
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
-I'm a part of Eagle Union.
 Have a look at the following for an idea of some of \
 the things I can help you with.
-I'm managed by [Poki](https://t.me/pokurt)
+I'm managed by [Decomposed](https://t.me/Decomposed)
 Chatbot module from [TheRealPhoenixBot](https://github.com/rsktg/TheRealPhoenixBot.git)
 Disaster module from [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot)
 *Main* commands available:
@@ -49,12 +43,9 @@ Disaster module from [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-LYNDA_IMG = "https://telegra.ph/file/35005c01182645232f2d3.jpg"
+LYNDA_IMG = "https://telegra.ph/file/83572306e26b055349097.jpg"
 
-DONATE_STRING = """Heya, glad to hear you want to donate!
-Lynda is hosted on one of Digital Ocean Servers. \
-You can donate to the original writer of the Base code, Paul
-There are two ways of supporting him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+DONATE_STRING = """Forget This Part"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -142,9 +133,9 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             first_name = update.effective_user.first_name
             buttons = InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="👥 Add Lynda to your group", url="https://t.me/LyndaRobot?startgroup=new")],
-                 [InlineKeyboardButton(text="🙋 Support Group", url="https://t.me/LyndaEagleSupport"), InlineKeyboardButton(text="🚫 Global Logs", url="https://t.me/LyndaGLogs")],
-                 [InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/LyndaUpdateLogs")]])
+                [[InlineKeyboardButton(text="👥 Add Uzaki to your group", url="https://t.me/UzakChanBot?startgroup=new")],
+                 [InlineKeyboardButton(text="🙋 Support Group", url="https://t.me/AnimeChatOfficial"), InlineKeyboardButton(text="🚫 Global Logs", url="https://t.me/joinchat/AAAAAEzQAelUnxRqH9cuCQ")],
+                 [InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/UzakiBotNews")]])
             message.reply_photo(
                 LYNDA_IMG,
                 PM_START_TEXT.format(
