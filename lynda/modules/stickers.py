@@ -273,7 +273,7 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
         success = bot.create_new_sticker_set(
             user.id,
             packname,
-            f"@{name}'s Sticker Pack" + extra_version,
+            f"@{name}'s kang pack" + extra_version,
             png_sticker=png_sticker,
             emojis=emoji,
         )
