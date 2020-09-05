@@ -391,10 +391,12 @@ def meme(_bot: Bot, update: Update):
     msg = update.effective_message
     meme = requests.get("https://some-random-api.ml/meme").json()
     image = meme.get("image")
+    caption = meme.get("caption")
     if not image:
         msg.reply_text("No URL was received from the API!")
         return
-    msg.reply_photo(image)
+    message.reply_photo(
+                photo=image, caption=caption)
     
 
 @run_async
