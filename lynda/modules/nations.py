@@ -519,7 +519,7 @@ __help__ = """
  - /Sardegnas - Lists all Sardegnas Nations.
  - /Neptunians - Lists all Neptunia Nations.
  Note: These commands list users with special bot priveleges and can only be used by them.
- You can visit @YorktownEagleUnion or @LyndaEagleSupport to query more about these.
+ You can visit @AnimeChatOfficial to query more about these.
 """
 
 SUDO_HANDLER = CommandHandler(("addsudo", "addRoyal"), addsudo, pass_args=True)
