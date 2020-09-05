@@ -394,7 +394,7 @@ def meme(_bot: Bot, update: Update):
     if not link:
         msg.reply_text("No URL was received from the API!")
         return
-    msg.reply_image(link)
+    msg.reply_image(image)
     
 
 @run_async
