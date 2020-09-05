@@ -385,8 +385,8 @@ def wink(_bot: Bot, update: Update):
         return
     msg.reply_video(link)
     
-    
- @run_async
+   
+@run_async
 def meme(_bot: Bot, update: Update):
     msg = update.effective_message
     meme = requests.get("https://some-random-api.ml/meme").json()
