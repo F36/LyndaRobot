@@ -395,7 +395,7 @@ def meme(_bot: Bot, update: Update):
     if not image:
         msg.reply_text("No URL was received from the API!")
         return
-    message.reply_photo(
+    msg.reply_photo(
                 photo=image, caption=caption)
     
 
