@@ -264,7 +264,7 @@ def steal(bot: Bot, update: Update, args: List[str]):
 
 
 def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
-    name = user.first_name
+    name = user.username
     name = name[:50]
     try:
         extra_version = ""
@@ -273,7 +273,7 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
         success = bot.create_new_sticker_set(
             user.id,
             packname,
-            f"{name}'s Sticker Pack" + extra_version,
+            f"@{name}'s Sticker Pack" + extra_version,
             png_sticker=png_sticker,
             emojis=emoji,
         )
@@ -312,7 +312,7 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
 STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid)
 GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker)
 STEAL_HANDLER = DisableAbleCommandHandler(
-    "steal", steal, pass_args=True, admin_ok=False
+    "kang", steal, pass_args=True, admin_ok=False
 )
 
 dispatcher.add_handler(STICKERID_HANDLER)
