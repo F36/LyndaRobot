@@ -373,7 +373,18 @@ def hug(_bot: Bot, update: Update):
         msg.reply_text("No URL was received from the API!")
         return
     msg.reply_video(link)
-
+    
+    
+@run_async
+def wink(_bot: Bot, update: Update):
+    msg = update.effective_message
+    wink = requests.get("https://some-random-api.ml/animu/wink").json()
+    link = wink.get("link")
+    if not link:
+        msg.reply_text("No URL was received from the API!")
+        return
+    msg.reply_video(link)
+    
 
 @run_async
 def roll(_bot: Bot, update: Update):
@@ -463,6 +474,7 @@ __help__ = """
  - /roll : Roll a dice.
  - /pat : pats a user by a reply to the message
  - /hug : hugs a user by a reply to the message
+ - /wink : winks a user by a reply to the message
  - /weebify <text>: returns a weebified text
  - /police : *Sirens* Polize iz here
  - /moon : Cycles all the phases of the moon emojis.
@@ -493,6 +505,7 @@ MOON_HANDLER = DisableAbleCommandHandler(["moon"], moon)
 CLOCK_HANDLER = DisableAbleCommandHandler(["clock"], clock)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug)
+WINK_HANDLER = DisableAbleCommandHandler("wink", wink)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
@@ -520,6 +533,7 @@ dispatcher.add_handler(ABUSE_HANDLER)
 dispatcher.add_handler(INSULT_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
+dispatcher.add_handler(WINK_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(OWO_HANDLER)
@@ -549,6 +563,7 @@ __command_list__ = [
     "abuse",
     "pat",
     "hug",
+    "wink",
     "copypasta",
     "owo",
     "stretch",
@@ -572,6 +587,7 @@ __handlers__ = [
     INSULT_HANDLER,
     PAT_HANDLER,
     HUG_HANDLER,
+    WINK_HANDLER,
     COPYPASTA_HANDLER,
     POLICE_HANDLER,
     MOON_HANDLER,
