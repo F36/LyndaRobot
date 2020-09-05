@@ -385,6 +385,17 @@ def wink(_bot: Bot, update: Update):
         return
     msg.reply_video(link)
     
+    
+ @run_async
+def meme(_bot: Bot, update: Update):
+    msg = update.effective_message
+    meme = requests.get("https://some-random-api.ml/meme").json()
+    image = meme.get("image")
+    if not link:
+        msg.reply_text("No URL was received from the API!")
+        return
+    msg.reply_image(link)
+    
 
 @run_async
 def roll(_bot: Bot, update: Update):
@@ -475,6 +486,7 @@ __help__ = """
  - /pat : pats a user by a reply to the message
  - /hug : hugs a user by a reply to the message
  - /wink : winks a user by a reply to the message
+ - /meme : sends A meme as  a reply to the message
  - /weebify <text>: returns a weebified text
  - /police : *Sirens* Polize iz here
  - /moon : Cycles all the phases of the moon emojis.
@@ -506,6 +518,7 @@ CLOCK_HANDLER = DisableAbleCommandHandler(["clock"], clock)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug)
 WINK_HANDLER = DisableAbleCommandHandler("wink", wink)
+MEME_HANDLER = DisableAbleCommandHandler("meme", meme)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
@@ -534,6 +547,7 @@ dispatcher.add_handler(INSULT_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
 dispatcher.add_handler(WINK_HANDLER)
+dispatcher.add_handler(MEME_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(OWO_HANDLER)
@@ -564,6 +578,7 @@ __command_list__ = [
     "pat",
     "hug",
     "wink",
+    "meme",
     "copypasta",
     "owo",
     "stretch",
@@ -588,6 +603,7 @@ __handlers__ = [
     PAT_HANDLER,
     HUG_HANDLER,
     WINK_HANDLER,
+    MEME_HANDLER,
     COPYPASTA_HANDLER,
     POLICE_HANDLER,
     MOON_HANDLER,
