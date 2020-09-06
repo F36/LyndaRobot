@@ -596,7 +596,7 @@ __command_list__ = [
     "hug",
     "wink",
     "meme",
-    "UZAKISUB",
+    "uzakisub",
     "copypasta",
     "owo",
     "stretch",
