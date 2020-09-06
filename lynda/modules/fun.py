@@ -400,17 +400,16 @@ def meme(_bot: Bot, update: Update):
     
     
 @run_async
-def tgsub(_bot: Bot, update: Update):
-    text = msg.text[len('/tgsub '):]
+def uzakisub(_bot: Bot, update: Update):
     msg = update.effective_message
-    sub = requests.get("https://tgsubs.vercel.app/{text}").json()
+    meme = requests.get("https://tgsubs.vercel.app/Uzakichan_wa_Asobitai").json()
     image = meme.get("image")
-    sub = meme.get("subs")
+    caption = meme.get("subs")
     if not image:
         msg.reply_text("No URL was received from the API!")
         return
     msg.reply_photo(
-                photo=image, caption=sub)
+                photo=image, caption=caption)
     
 
 @run_async
@@ -535,7 +534,7 @@ PAT_HANDLER = DisableAbleCommandHandler("pat", pat)
 HUG_HANDLER = DisableAbleCommandHandler("hug", hug)
 WINK_HANDLER = DisableAbleCommandHandler("wink", wink)
 MEME_HANDLER = DisableAbleCommandHandler("meme", meme)
-TGSUBS_HANDLER = DisableAbleCommandHandler("tgsub", tgsub)
+UZAKISUB_HANDLER = DisableAbleCommandHandler("uzakisub", uzakisub)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, pass_args=True)
 ROLL_HANDLER = DisableAbleCommandHandler("roll", roll)
@@ -565,7 +564,7 @@ dispatcher.add_handler(PAT_HANDLER)
 dispatcher.add_handler(HUG_HANDLER)
 dispatcher.add_handler(WINK_HANDLER)
 dispatcher.add_handler(MEME_HANDLER)
-dispatcher.add_handler(TGSUBS_HANDLER)
+dispatcher.add_handler(UZAKISUB_HANDLER)
 dispatcher.add_handler(COPYPASTA_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(OWO_HANDLER)
@@ -597,7 +596,7 @@ __command_list__ = [
     "hug",
     "wink",
     "meme",
-    "tgsub",
+    "UZAKISUB",
     "copypasta",
     "owo",
     "stretch",
@@ -623,7 +622,7 @@ __handlers__ = [
     HUG_HANDLER,
     WINK_HANDLER,
     MEME_HANDLER,
-    TGSUBS_HANDLER,
+    UZAKISUB_HANDLER,
     COPYPASTA_HANDLER,
     POLICE_HANDLER,
     MOON_HANDLER,
