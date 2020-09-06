@@ -389,9 +389,9 @@ def wink(_bot: Bot, update: Update):
 @run_async
 def meme(_bot: Bot, update: Update):
     msg = update.effective_message
-    meme = requests.get("https://some-random-api.ml/meme").json()
-    image = meme.get("image")
-    caption = meme.get("caption")
+    meme = requests.get("https://meme-api.herokuapp.com/gimme/dankmemes").json()
+    image = meme.get("url")
+    caption = meme.get("title")
     if not image:
         msg.reply_text("No URL was received from the API!")
         return
