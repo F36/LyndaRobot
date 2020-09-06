@@ -401,7 +401,7 @@ def meme(_bot: Bot, update: Update):
     
 @run_async
 def tgsub(_bot: Bot, update: Update):
-    text = message.text[len('/tgsub '):]
+    text = msg.text[len('/tgsub '):]
     msg = update.effective_message
     sub = requests.get("https://tgsubs.vercel.app/{text}").json()
     image = meme.get("image")
