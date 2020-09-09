@@ -17,14 +17,15 @@ from lynda.modules.helper_funcs.chat_status import is_user_admin
 from lynda.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-Hi {}, my name is {}! 
-I am an Anime themed group management bot.
-You can find my list of available commands with /help.
-The support group chat is at @AnimeChatOfficial.
+Hi {}, my name is {}!
+// I am an Anime themed group management bot with a lot of Special Features.
+You can find the list of available commands with /help.
+`Maintained by` @AnimeChatOfficial
 """
 
 HELP_STRINGS = """
 Hey there! My name is *{}*.
+I'm a part of Eagle Union.
 Have a look at the following for an idea of some of \
 the things I can help you with.
 I'm managed by [Decomposed](https://t.me/Decomposed)
@@ -38,14 +39,13 @@ Disaster module from [SaitamaRobot](https://github.com/AnimeKaizoku/SaitamaRobot
  - /settings:
    - in PM: will send you your settings for all supported modules.
    - in a group: will redirect you to pm, with all that chat's settings.
-
 {}
 And the following:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 LYNDA_IMG = "https://telegra.ph/file/83572306e26b055349097.jpg"
 
-DONATE_STRING = """Forget This Part"""
+DONATE_STRING = """NO DONT!."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -133,7 +133,7 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             first_name = update.effective_user.first_name
             buttons = InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="👥 Add Uzaki to your group", url="https://t.me/UzakChanBot?startgroup=new")],
+                [[InlineKeyboardButton(text="👥 Add Uzaki to your group", url="https://t.me/Uzaki?startgroup=new")],
                  [InlineKeyboardButton(text="🙋 Support Group", url="https://t.me/AnimeChatOfficial"), InlineKeyboardButton(text="🚫 Global Logs", url="https://t.me/joinchat/AAAAAEzQAelUnxRqH9cuCQ")],
                  [InlineKeyboardButton(text="❔ Help", callback_data="help_back"), InlineKeyboardButton(text="🔔 Update Channel", url="https://t.me/UzakiBotNews")]])
             message.reply_photo(
@@ -181,66 +181,60 @@ def error_callback(_bot, _update, error):
 
 @run_async
 def help_button(bot: Bot, update: Update):
-    """Inlinebutton for Help Module"""
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
     prev_match = re.match(r"help_prev\((.+?)\)", query.data)
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
+
+    print(query.message.chat.id)
+
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = "Here is the help for the *{}* module:\n".format(
-                HELPABLE[module].__mod_name__) + HELPABLE[module].__help__
-            query.message.reply_text(text=text,
-                                     parse_mode=ParseMode.MARKDOWN,
-                                     reply_markup=InlineKeyboardMarkup(
-                                         [[InlineKeyboardButton(text="Back", callback_data="help_back")]]))
+            text = (
+                "Here is the help for the *{}* module:\n".format(
+                    HELPABLE[module].__mod_name__
+                )
+                + HELPABLE[module].__help__
+            )
+            query.message.edit_text(
+                text=text,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton(text="Back", callback_data="help_back")]]
+                ),
+            )
 
         elif prev_match:
-            curr_page = int(prev_match.group(1))
-            query.message.reply_text(
-                HELP_STRINGS,
-                parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(
-                        curr_page - 1,
-                        HELPABLE,
-                        "help")))
-
-        elif next_match:
-            next_page = int(next_match.group(1))
-            query.message.reply_text(
-                HELP_STRINGS,
-                parse_mode=ParseMode.MARKDOWN,
-                reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(
-                        next_page + 1,
-                        HELPABLE,
-                        "help")))
-
-        elif back_match:
-            query.message.reply_text(
+                curr_page = int(prev_match.group(1))
+                query.message.edit_text(
                 text=HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(
-                        0,
-                        HELPABLE,
-                        "help")))
+                    paginate_modules(curr_page - 1, HELPABLE, "help")))
+
+        elif next_match:
+            next_page = int(next_match.group(1))
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(next_page + 1, HELPABLE, "help")))
+
+        elif back_match:
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help")))
 
         # ensure no spinny white circle
         bot.answer_callback_query(query.id)
-        query.message.delete()
-    except BadRequest as excp:
-        if excp.message == "Message is not modified":
-            pass
-        elif excp.message == "Query_id_invalid":
-            pass
-        elif excp.message == "Message can't be deleted":
-            pass
-        else:
-            LOGGER.exception("Exception in help buttons. %s", str(query.data))
+        # query.message.delete()
+
+    except BadRequest:
+        pass
+
 
 
 @run_async
