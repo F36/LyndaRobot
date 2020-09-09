@@ -43,6 +43,7 @@ UNGBAN_ERRORS = {
     "Channel_private",
     "Chat_admin_required",
     "Peer_id_invalid",
+    "User not found",
 }
 
 
@@ -222,7 +223,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
         bot.send_message(
             user_id,
             "You have been globally banned from all groups where I have administrative permissions."
-            "If you think that this was a mistake, you may appeal your ban here: @LyndaEagleSupport",
+            "If you think that this was a mistake, you may appeal your ban here: @AnimeChatOfficial",
             parse_mode=ParseMode.HTML)
     except Exception as e:
         print(e)
@@ -468,7 +469,7 @@ def __chat_settings__(chat_id, _user_id):
 __help__ = """
 *Admin only:*
  - /gbanstat
-Note: You can appeal gbans or ask gbans at @LyndaEagleSupport
+Note: You can appeal gbans or ask gbans at @AnimeChatOfficial
 Lynda also integrates @Spamwatch API into gbans to remove Spammers as much as possible from your chatroom!
 *What is SpamWatch?*
 SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters[.](https://telegra.ph/file/ac12a2c6b831dd005015b.jpg)
