@@ -389,7 +389,7 @@ def wink(_bot: Bot, update: Update):
 @run_async
 def meme(_bot: Bot, update: Update):
     msg = update.effective_message
-    meme = requests.get("https://meme-api.herokuapp.com/gimme/MinecraftMemes/").json()
+    meme = requests.get("https://meme-api.herokuapp.com/gimme/Animemes/").json()
     image = meme.get("url")
     caption = meme.get("title")
     if not image:
